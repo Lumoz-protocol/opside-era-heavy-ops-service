@@ -177,6 +177,11 @@ extern "C" {
 extern "C" {
     pub fn bc_device_enable_peer_access(device_id: ::std::os::raw::c_int) -> bc_error;
 }
+
+extern "C" {
+    pub fn bc_device_can_access_peer(peer_access_available: *mut ::std::os::raw::c_int, device_id: ::std::os::raw::c_int, peer_device_id: ::std::os::raw::c_int) -> bc_error;
+}
+
 extern "C" {
     pub fn bc_memcpy(
         dst: *mut ::std::os::raw::c_void,

@@ -436,7 +436,7 @@ fn load_setup_or_read_from_cache<AM: ArtifactProvider>(
     if setup.is_free() {
         println!("setup isn't in cache, loading.");
         // setup initially contains dummy setup, so we need to load actual setup
-        let inner_setup = unsafe { Arc::get_mut_unchecked(&mut setup) };
+        let inner_setup: &mut ZkSyncSetup = unsafe { Arc::get_mut_unchecked(&mut setup) };
         if let Ok(setup_encoding) = artifact_manager.get_setup(circuit_id) {
             inner_setup.reload(setup_encoding, circuit_id);
             ctx.report_sender

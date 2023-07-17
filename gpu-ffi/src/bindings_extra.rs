@@ -51,6 +51,17 @@ pub fn device_enable_peer_access(
     Ok(())
 }
 
+
+pub fn bc_device_can_access_peer(
+    device_id: i32,
+) -> Result<i32, GpuError> {
+    let mut peer_access_available = 0;
+    if unsafe { bc_device_can_access_peer(std::ptr::addr_of_mut!(peer_access_available), device_id, peer_device_id) } != 0 {
+        return Err(GpuError::DevicePeerAccessErr);
+    }
+    Ok(peer_access_available)
+}
+
 pub fn mem_pool_disable_peer_access(
     pool: bc_mem_pool,
     device_id: usize,

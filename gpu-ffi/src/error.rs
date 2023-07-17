@@ -28,4 +28,5 @@ pub enum GpuError {
     DevicePeerAccessErr,
     MemPoolPeerAccessErr,
     SetDeviceErr,
+    DevicePeerCanAccessErr,
 }

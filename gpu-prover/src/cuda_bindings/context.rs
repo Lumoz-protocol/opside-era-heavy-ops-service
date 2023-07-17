@@ -99,10 +99,19 @@ impl GpuContext {
             if *idx == device_id {
                 continue;
             }
+
             unsafe {
-                let result = bc_device_enable_peer_access(*idx as i32);
-                if result != 0 {
-                    return Err(GpuError::DevicePeerAccessErr(result));
+                let mut peer_access_available = 0;
+                let res = bc_device_can_access_peer(peer_access_available, device_id, *idx);
+                if res != 0 {
+                    return Err(GpuError::DevicePeerCanAccessErr(result));
+                }
+
+                if (peer_access_available) {
+                    let result = bc_device_enable_peer_access(*idx as i32);
+                    if result != 0 {
+                        return Err(GpuError::DevicePeerAccessErr(result));
+                    }
                 }
             }
         }
@@ -130,7 +139,7 @@ impl GpuContext {
 
         let bases = transmute_values(bases.as_ref().as_ref());
 
-        let len = bases.len() as u64;
+        let len: u64 = bases.len() as u64;
         let mut d_bases_ptr = std::ptr::null_mut();
 
         unsafe {

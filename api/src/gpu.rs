@@ -193,6 +193,7 @@ impl Prover {
         } else {
             // ProvingAssembly contains only witness values
             // For setup values we need a precomputed setup
+            #[allow(cast_ref_to_mut)] 
             unsafe { &mut *(setup.expect("setup") as &Setup as *const Setup as *mut Setup) }
         };
 

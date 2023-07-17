@@ -45,6 +45,7 @@ pub enum GpuError {
     DevicePeerAccessErr(u32),
     MemPoolPeerAccessErr(u32),
     SetDeviceErr(u32),
+    DevicePeerCanAccessErr(i32),
 
     DeviceInUseErr(usize), // We can't allocate two Contexts with same device_id
     AssemblyError(String),
