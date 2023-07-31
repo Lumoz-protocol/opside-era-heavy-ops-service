@@ -154,17 +154,17 @@ impl ProverContext {
 }
 
 fn check_job_is_allowed(ctx: &ProverContext, job_id: usize, circuit_id: u8) -> bool {
-    if let Some(ref circuit_ids) = ctx.specialized_circuit_ids {
-        if !circuit_ids.contains(&circuit_id) {
-            ctx.report_sender
-                .send(JobResult::Failure(
-                    job_id,
-                    format!("unknown circuit type {}", circuit_id),
-                ))
-                .unwrap();
-            return false;
-        }
-    }
+    // if let Some(ref circuit_ids) = ctx.specialized_circuit_ids {
+    //     if !circuit_ids.contains(&circuit_id) {
+    //         ctx.report_sender
+    //             .send(JobResult::Failure(
+    //                 job_id,
+    //                 format!("unknown circuit type {}", circuit_id),
+    //             ))
+    //             .unwrap();
+    //         return false;
+    //     }
+    // }
     true
 }
 
